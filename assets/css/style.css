@@ -94,6 +94,9 @@ color: #E0B612;
     background: #495BC3;
     color: #fff;
 }
+.submit-btn:disabled {
+    background: #343435;
+}
 .notify {
     color: #fff;
     text-align: center;
@@ -109,6 +112,7 @@ color: #E0B612;
     margin: 0 auto;
 }
 .action-left {
+    font-size: 20px;
     color: #FF3C5F;
     margin-top: 10px;
 }

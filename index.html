@@ -17,7 +17,7 @@
             <div class="col-md-6">
                 <div class="pin-generator half-width">
                     <input disabled class="getOtp__field form-control" type="text">
-                    <button class="generate__btn">Generate OTP</button>
+                    <button onclick="generateOTP()" class="generate__btn">Generate OTP</button>
                 </div>
             </div>
             <div class="col-md-6">
@@ -46,7 +46,7 @@
                                 <input type="button" value="C" class="button">
                             </div>
                             <div>
-                                <button type="submit" class="submit-btn">Submit</button>
+                                <button onclick="verifyOTP()" class="submit-btn">Submit</button>
                                 <p class="action-left"><span id="remaining">3</span> <span id="waiting">try left</span>
                                 </p>
                             </div>

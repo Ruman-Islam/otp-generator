@@ -1,3 +1,14 @@
+// OTP input fields
+const getOtpField = document.querySelector('.getOtp__field');
+const inputOtpField = document.querySelector('.inputOtp__field');
+// success/error message
+const successMsg = document.querySelector('.notify__success');
+const errorMsg = document.querySelector('.notify__error');
+// wait/remaining span tag TEXT
+const waitSpan = document.getElementById('waiting');
+const remainingSpan = document.getElementById('remaining');
+
+
 // OTP generator
 function getPin() {
     const pin = Math.round(Math.random() * 10000);
@@ -9,19 +20,11 @@ function getPin() {
 }
 
 
-// OTP input fields
-const getOtpField = document.querySelector('.getOtp__field');
-const inputOtpField = document.querySelector('.inputOtp__field');
-// success/error message
-const successMsg = document.querySelector('.notify__success');
-const errorMsg = document.querySelector('.notify__error');
-
-
 // OTP generator button
-document.querySelector('.generate__btn').addEventListener('click', function () {
+function generateOTP() {
     const otp = getPin();
     getOtpField.value = otp;
-});
+}
 
 
 // put otp
@@ -41,29 +44,34 @@ document.querySelector('.calc-body').addEventListener('click', function (event) 
 
 // Verifying otp
 let remaining = 3;
-document.querySelector('.submit-btn').addEventListener('click', function () {
+function verifyOTP() {
     if (getOtpField.value === inputOtpField.value && getOtpField.value !== '') {
-        successMsg.style.display = 'block';
-        errorMsg.style.display = 'none';
+        displayError('block', 'none');
     } else {
         remaining--;
-        successMsg.style.display = 'none';
-        errorMsg.style.display = 'block';
-        document.getElementById('remaining').innerText = remaining;
+        displayError('none', 'block');
+        remainingSpan.innerText = remaining;
         if (remaining === 0) {
             document.querySelector('.submit-btn').setAttribute('disabled', true);
-            document.getElementById('waiting').innerText = 'Please wait a minute';
-            document.getElementById('remaining').innerText = '';
-            setTimeout(refresh, 60000);
+            waitSpan.innerText = 'Please wait a minute';
+            remainingSpan.innerText = '';
+            setTimeout(refresh, 2000);
         }
     }
-});
+}
 
-// error message
+// 
+function displayError(success, error) {
+    successMsg.style.display = success;
+    errorMsg.style.display = error;
+}
+
+
+// Refresh remaining left
 function refresh() {
-    document.querySelector('.submit-btn').removeAttribute('disabled');
     remaining = 3;
-    document.getElementById('remaining').innerText = remaining;
-    document.getElementById('waiting').innerText = 'try left';
+    document.querySelector('.submit-btn').removeAttribute('disabled');
+    remainingSpan.innerText = remaining;
+    waitSpan.innerText = 'try left';
     errorMsg.style.display = 'none';
 }
