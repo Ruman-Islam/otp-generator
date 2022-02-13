@@ -5,8 +5,11 @@ body {
     background: #10101B;
     height: 100vh;
 }
+.treasure {
+    display: none;
+}
 .container {
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 .half-width {

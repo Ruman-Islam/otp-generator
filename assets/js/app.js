@@ -64,6 +64,7 @@ function verifyOTP() {
 function displayError(success, error) {
     successMsg.style.display = success;
     errorMsg.style.display = error;
+    document.querySelector('.treasure').style.display = success;
 }
 
 
