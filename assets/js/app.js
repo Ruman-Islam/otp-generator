@@ -1,12 +1,8 @@
-// OTP input fields
-const getOtpField = document.querySelector('.getOtp__field');
-const inputOtpField = document.querySelector('.inputOtp__field');
-// success/error message
-const successMsg = document.querySelector('.notify__success');
-const errorMsg = document.querySelector('.notify__error');
-// wait/remaining span tag TEXT
-const waitSpan = document.getElementById('waiting');
-const remainingSpan = document.getElementById('remaining');
+// DOM elements capturing common function
+function getId(get) {
+    const common = document.querySelector(get);
+    return common;
+}
 
 
 // OTP generator
@@ -23,15 +19,18 @@ function getPin() {
 // OTP generator button
 function generateOTP() {
     const otp = getPin();
-    getOtpField.value = otp;
+    // getOtpField.value = otp;
+    getId('.getOtp__field').value = otp;
 }
 
 
 // put otp
 document.querySelector('.calc-body').addEventListener('click', function (event) {
     const number = event.target.value;
+    const inputOtpField = getId('.inputOtp__field');
     if (isNaN(number)) {
         if (number === 'C') {
+            // inputOtpField.value = '';
             inputOtpField.value = '';
         } else if (number === '<') {
             inputOtpField.value = inputOtpField.value.slice(0, -1);
@@ -45,16 +44,18 @@ document.querySelector('.calc-body').addEventListener('click', function (event) 
 // Verifying otp
 let remaining = 3;
 function verifyOTP() {
+    const getOtpField = getId('.getOtp__field');
+    const inputOtpField = getId('.inputOtp__field');
     if (getOtpField.value === inputOtpField.value && getOtpField.value !== '') {
         displayError('block', 'none');
     } else {
         remaining--;
         displayError('none', 'block');
-        remainingSpan.innerText = remaining;
+        getId('.remaining').innerText = remaining;
         if (remaining === 0) {
             document.querySelector('.submit-btn').setAttribute('disabled', true);
-            waitSpan.innerText = 'Please wait a minute';
-            remainingSpan.innerText = '';
+            getId('.waiting').innerText = 'Please wait a minute';
+            getId('.remaining').innerText = '';
             setTimeout(refresh, 60000);
         }
     }
@@ -62,8 +63,8 @@ function verifyOTP() {
 
 //  display error/success
 function displayError(success, error) {
-    successMsg.style.display = success;
-    errorMsg.style.display = error;
+    getId('.notify__success').style.display = success;
+    getId('.notify__error').style.display = error;
     document.querySelector('.treasure').style.display = success;
 }
 
@@ -72,7 +73,7 @@ function displayError(success, error) {
 function refresh() {
     remaining = 3;
     document.querySelector('.submit-btn').removeAttribute('disabled');
-    remainingSpan.innerText = remaining;
-    waitSpan.innerText = 'try left';
-    errorMsg.style.display = 'none';
+    getId('.remaining').innerText = remaining;
+    getId('.waiting').innerText = 'try left';
+    getId('.notify__error').style.display = 'none';
 }
