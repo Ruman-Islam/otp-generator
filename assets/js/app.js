@@ -55,12 +55,12 @@ function verifyOTP() {
             document.querySelector('.submit-btn').setAttribute('disabled', true);
             waitSpan.innerText = 'Please wait a minute';
             remainingSpan.innerText = '';
-            setTimeout(refresh, 2000);
+            setTimeout(refresh, 60000);
         }
     }
 }
 
-// 
+//  display error/success
 function displayError(success, error) {
     successMsg.style.display = success;
     errorMsg.style.display = error;
