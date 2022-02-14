@@ -72,13 +72,12 @@ width: 100%;
 width: 20%;
 background: #425062;
 color: #fff;
-padding: 20px 0;
+padding: 20px;
 margin: 5px;
 display: inline-block;
 font-size: 25px;
 text-align: center;
-vertical-align: middle;
-margin-right: -4px;
+/* vertical-align: middle; */
 border-radius: 10px;
 cursor: pointer;
 border: 0;
@@ -97,7 +96,7 @@ color: #E0B612;
     background: #495BC3;
     color: #fff;
 }
-.submit-btn:disabled {
+.submit-btn:disabled,.submit-btn:active {
     background: #343435;
 }
 .notify {
