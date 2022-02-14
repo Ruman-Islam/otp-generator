@@ -43,6 +43,7 @@ document.querySelector('.calc-body').addEventListener('click', function (event) 
 
 // Verifying otp
 let remaining = 3;
+let count = 30;
 function verifyOTP() {
     const getOtpField = getId('.getOtp__field');
     const inputOtpField = getId('.inputOtp__field');
@@ -54,9 +55,9 @@ function verifyOTP() {
         getId('.remaining').innerText = remaining;
         if (remaining === 0) {
             document.querySelector('.submit-btn').setAttribute('disabled', true);
-            getId('.waiting').innerText = 'Please wait a minute';
+            getId('.waiting').innerText = 'Please wait a 30 seconds';
             getId('.remaining').innerText = '';
-            setTimeout(refresh, 60000);
+            setTimeout(refresh, 30000);
         }
     }
 }
