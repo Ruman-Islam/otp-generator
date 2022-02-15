@@ -54,6 +54,7 @@ function verifyOTP() {
         getId('.remaining').innerText = '';
     } else {
         remaining--;
+        getId('.waiting').innerText = 'try left';
         displayError('none', 'block');
         getId('.remaining').innerText = remaining;
         if (remaining === 0) {
