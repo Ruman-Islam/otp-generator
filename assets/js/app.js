@@ -42,22 +42,25 @@ document.querySelector('.calc-body').addEventListener('click', function (event) 
 
 
 // Verifying otp
+let intervalFunction;
 let remaining = 3;
-let count = 30;
+let count = 10;
 function verifyOTP() {
     const getOtpField = getId('.getOtp__field');
     const inputOtpField = getId('.inputOtp__field');
     if (getOtpField.value === inputOtpField.value && getOtpField.value !== '') {
         displayError('block', 'none');
+        getId('.waiting').innerText = 'Success';
+        getId('.remaining').innerText = '';
     } else {
         remaining--;
         displayError('none', 'block');
         getId('.remaining').innerText = remaining;
         if (remaining === 0) {
-            document.querySelector('.submit-btn').setAttribute('disabled', true);
-            getId('.waiting').innerText = 'Please wait a 30 seconds';
             getId('.remaining').innerText = '';
-            setTimeout(refresh, 30000);
+            document.querySelector('.submit-btn').setAttribute('disabled', true);
+            intervalFunction = setInterval(countDown, 1000);
+            setTimeout(refresh, 10000);
         }
     }
 }
@@ -78,3 +81,21 @@ function refresh() {
     getId('.waiting').innerText = 'try left';
     getId('.notify__error').style.display = 'none';
 }
+
+// Stop interval
+function stopInterval() {
+    clearInterval(intervalFunction);
+    getId('.waiting').innerText = 'try left';
+}
+
+// for wrong otp input wait 10 seconds function
+function countDown() {
+    count--;
+    getId('.waiting').innerText = 'Please wait ' + count + ' seconds';
+    if (count === 0) {
+        count = 10;
+        stopInterval();
+    }
+}
+
+
